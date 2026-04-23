@@ -1,0 +1,53 @@
+jdbc:h2:mem:testdb
+dependency injection
+Bean Validation @ not blank
+http://localhost:8080/applications
+INSERT INTO APPLICATION 
+(COMPANY_NAME, POSITION, APP_STATUS, APPLIED_DATE, UPDATED_AT)
+VALUES 
+('Amazon', 'Backend Developer', 'PENDING', '2026-03-16', NULL);
+SELECT* FROM APPLICATION
+
+
+Error types : 400 BAD REQUEST
+             500 INTERNAL SERVER ERROR 200	“All good
+400	“You sent wrong data
+404	“I can’t find this 
+500	“I broke internally 
+
+
+manual validation 
+@valid
+
+Postman instructions: 
+1. post : POST http://localhost:8080/applications
+{
+  "companyName": "Google",
+  "position": "Backend Engineer",
+  "status": "PENDING",
+  "appliedDate": "2026-03-18"
+}
+sql : INSERT INTO application (company_name, position, status, applied_date, created_at, updated_at)
+VALUES ('Google', 'Backend Engineer', 'PENDING', '2026-03-18', NOW(), NOW());
+
+2. update : PUT http://localhost:8080/applications/1
+{
+  "companyName": "Amazon",
+  "position": "Full Stack Developer",
+  "status": "INTERVIEWED",
+  "appliedDate": "2026-03-18"
+}
+sql : UPDATE application
+SET company_name = 'Amazon',
+    position = 'Full Stack Developer',
+    status = 'INTERVIEWED',
+    applied_date = '2026-03-18',
+    updated_at = NOW()
+WHERE id = 1;
+
+3. list : GET http://localhost:8080/applications
+sql : SELECT * FROM application;
+
+4. delete : DELETE http://localhost:8080/applications/1
+   sql : DELETE FROM application
+WHERE id = 1;

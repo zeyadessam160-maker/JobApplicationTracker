@@ -1,0 +1,97 @@
+.box {
+  box-shadow: -5px 2px 54px -9px rgba(0, 0, 0, 1);
+  background-color: #22343a; /* Darker background for the box */
+}
+
+body {
+  background-color: #22343a !important; /* Darker background for the body */
+}
+
+h1 {
+  color: #17a2b8 !important; /* Green color for the heading */
+}
+
+input,
+textarea {
+  background-color: transparent !important;
+  color: #fff !important;
+}
+
+p {
+  color: #fff !important; /* White text for paragraphs */
+}
+
+p a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: gray !important; /* or any color you prefer */
+  opacity: 1; /* makes sure the color is not faded */
+}
+
+.btn-outline-info:hover {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.changePassword {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.changePasswordField {
+  width: 600px;
+  height: 600px;
+  position: relative;
+  /* background-color: gray; */
+  box-shadow: -5px 2px 54px -9px rgba(0, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group {
+  /* width: 100%; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-container {
+  position: absolute;
+  height: 50px;
+  width: 10%;
+  /* overflow: hidden; */
+  margin: 0 auto;
+  /* background-color: tomato; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.shift-left {
+  left: -10% !important;
+  /* top: 50% !important; */
+  transform: translateX(-50%) !important;
+}
+.shift-right {
+  left: 10% !important;
+  /* top: 50% !important; */
+  transform: translate(-50%, -50%) !important;
+}

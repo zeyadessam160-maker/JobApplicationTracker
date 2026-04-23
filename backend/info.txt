@@ -1,0 +1,6 @@
+Securityconfig: 
+method chaining 
+lamda expression 
+
+
+convert to byte
