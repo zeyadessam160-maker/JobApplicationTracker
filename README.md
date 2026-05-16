@@ -100,18 +100,21 @@ Password:
 ```
 Leave the password empty.
 ### Main API end points : 
-Method  	Endpoint	             What it does
+## Main API Endpoints
 
-POST	   /auth/register	        Creates a new user account
-POST	   /auth/login	            Logs in a user and returns a JWT token
-POST	   /auth/change-password	Changes the password of the logged-in user
-GET	       /applications	        Loads the applications of the logged-in user
-POST	   /applications	        Adds a new job application
-PUT	       /applications/{id}	    Updates an existing application
-DELETE	   /applications/{id}	    Deletes an application
-GET	       /profile	                Loads the profile of the logged-in user
-PUT	       /profile	                Updates the profile name or profile image
+| Method | Endpoint | What it does |
+|--------|----------|--------------|
+| POST | `/auth/register` | Creates a new user account |
+| POST | `/auth/login` | Logs in a user and returns a JWT token |
+| POST | `/auth/change-password` | Changes the password of the logged-in user |
+| GET | `/applications` | Loads the applications of the logged-in user |
+| POST | `/applications` | Adds a new job application |
+| PUT | `/applications/{id}` | Updates an existing application |
+| DELETE | `/applications/{id}` | Deletes an application |
+| GET | `/profile` | Loads the profile of the logged-in user |
+| PUT | `/profile` | Updates the profile name or profile image |
 
-AUTHOR 
-Zeyad Aly
+Author : Zeyad Aly
+
+
 
