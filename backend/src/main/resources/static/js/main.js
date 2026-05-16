@@ -1,9 +1,18 @@
+const token = localStorage.getItem("token");
+
+if (!token) {
+    window.location.href = "login.html";
+}
+
+
 let selectedId = null;
 let applications = [];
+const name = localStorage.getItem("userName");
+
 
 
 document.getElementById("welcomeMessage").textContent =
-    "Welcome back, Ahmed Darwish!";
+    "Welcome back, " + name + "!";
 
 const grid = document.getElementById("applicationsGrid");
 const overlay = document.getElementById("detailsOverlay");
@@ -33,7 +42,12 @@ async function loadApplications() {
 
     try {
 
-        const response = await fetch("http://localhost:8080/applications");
+        const response = await fetch("/applications", {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        });
+
         applications = await response.json();
 
         renderCards();
@@ -42,7 +56,6 @@ async function loadApplications() {
         console.error("Error loading applications:", error);
     }
 }
-
 
 // ==========================
 // RENDER APPLICATION CARDS
@@ -131,12 +144,13 @@ document.getElementById("updateBtn").addEventListener("click", async () => {
 
     try {
 
-        await fetch(`http://localhost:8080/applications/${selectedId}`, {
+        await fetch(`/applications/${selectedId}`, {
 
             method: "PUT",
 
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
             },
 
             body: JSON.stringify(updatedApp)
@@ -174,9 +188,11 @@ confirmYes.addEventListener("click", async () => {
     if (!selectedId) return;
 
     try {
-
-        await fetch(`http://localhost:8080/applications/${selectedId}`, {
-            method: "DELETE"
+        await fetch(`/applications/${selectedId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
         });
 
         confirmOverlay.style.display = "none";
@@ -202,7 +218,8 @@ logoutNo.addEventListener("click", () => {
 
 logoutYes.addEventListener("click", () => {
 
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
 
     window.location.href = "login.html";
 });
@@ -213,7 +230,7 @@ const newAppBtn = document.getElementById("newApplicationBtn");
 
 if (newAppBtn) {
     newAppBtn.addEventListener("click", () => {
-        window.location.href = "../pages/newApp.html";
+        window.location.href = "newApp.html";
     });
 }
 

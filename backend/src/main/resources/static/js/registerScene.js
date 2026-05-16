@@ -132,16 +132,49 @@ confirmPasswordInput.addEventListener("input", function () {
 });
 
 // Form submit
-registerForm.addEventListener("submit", function (e) {
-    e.preventDefault(); // stop default form
+// Form submit
+registerForm.addEventListener("submit", async function (e) {
+
+    e.preventDefault();
+
     const nameIsValid = validateName();
     const emailIsValid = validateEmail();
     const passwordIsValid = validatePassword();
     const confirmPasswordIsValid = validateConfirmPassword();
 
     if (nameIsValid && emailIsValid && passwordIsValid && confirmPasswordIsValid) {
-        // everything ok -> go to login
-        window.location.href = "login.html";
+
+        try {
+
+            const response = await fetch("/auth/register", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    password: passwordInput.value
+                })
+
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                emailError.textContent = errorText;
+                return;
+            }
+
+            // success → go to login
+            window.location.href = "login.html";
+
+        } catch (error) {
+            console.error("Register failed:", error);
+            emailError.textContent = "Something went wrong.";
+        }
     }
 });
 

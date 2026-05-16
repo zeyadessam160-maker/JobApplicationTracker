@@ -19,6 +19,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = true, columnDefinition = "TEXT")
+    private String profileImage;
+
+
+
+
     // One user has many applications
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Application> applications;
@@ -39,6 +45,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
     }
 
     public List<Application> getApplications() {
@@ -63,6 +73,10 @@ public class User {
 
     public void setApplications(List<Application> applications) {
         this.applications = applications;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
 }

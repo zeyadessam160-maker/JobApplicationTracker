@@ -4,6 +4,7 @@ import com.jobapp.job_application_manager.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -17,21 +18,18 @@ public class GlobalExceptionHandler {
     }
 
    // handling specific exception ( bad requests )
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ApiResponse> handleBadRequest(BadRequestException ex) {
+   @ExceptionHandler(Exception.class)
+   public ResponseEntity<ApiResponse> handleGeneralException(Exception ex, HttpServletRequest request) {
 
-        ApiResponse response = new ApiResponse(false, ex.getMessage());
+       String path = request.getRequestURI();
 
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
+       if (path.startsWith("/h2-console")) {
+           throw new RuntimeException(ex);
+       }
 
-    // Handle all other unexpected exceptions
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse> handleGeneralException(Exception ex) {
+       ApiResponse response = new ApiResponse(false, "Something went wrong");
 
-        ApiResponse response = new ApiResponse(false, "Something went wrong");
-
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+       return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+   }
 
 }
