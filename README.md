@@ -112,6 +112,6 @@ DELETE	   /applications/{id}	    Deletes an application
 GET	       /profile	                Loads the profile of the logged-in user
 PUT	       /profile	                Updates the profile name or profile image
 
-AUTHOR 
+Author 
 Zeyad Aly
 
